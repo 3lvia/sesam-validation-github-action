@@ -1,5 +1,5 @@
 # Container image that runs your code
-FROM python:3.9-slim
+FROM python:3.12-slim
 
 RUN mkdir -p /github/workspace
 RUN mkdir -p /sesam
