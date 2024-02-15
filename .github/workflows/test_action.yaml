@@ -1,6 +1,6 @@
 # .github/workflows/test_action.yaml
 name: Test Action
-id: test_action
+
 on: [push]
 
 jobs:
