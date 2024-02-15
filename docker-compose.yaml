@@ -1,0 +1,10 @@
+services:
+  sesam:
+    image: mofsesam/elvia-validate
+    build: .
+    environment:
+      - NODE=${NODE}
+      - JWT=${JWT}
+    command: ["-version"]
+    volumes:
+      - ./github/workspace:/github/workspace

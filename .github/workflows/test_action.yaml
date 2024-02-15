@@ -1,20 +1,25 @@
 # .github/workflows/test_action.yaml
 name: Test Action
+id: test_action
 on: [push]
 
 jobs:
-  get-num-square:
+  validate:
     runs-on: ubuntu-latest
-    name: Returns the number square
+    name: Validate
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Fetch num squared
-        id: get_square
+      - name: Run sesam-py 
+        id: sesam_py
         uses: ./ # Uses an action in the root directory
         # or use a released GitHub Action
-        # uses: shipyard/github-action/fetch-shipyard-env@1.0.0
+        # uses: 3lvia/sesam-validate-action@v1
         with:
-          num: 11
-      - name: Print the square
-        run: echo "${{ steps.get_square.outputs.num_squared }}"
+          ci_node: "${{ vars.ci_node }}"
+          ci_jwt: "${{ secrets.ci_jwt }}"
+          sesam_args: "-version"
+        # run: |
+        #   echo "Sesam-Py version: ${{ steps.sesam_py.outputs.version }}"
+        #   echo "Sesam-Py status: ${{ steps.sesam_py.outputs.status }}"
+        #   echo "Sesam-Py message: ${{ steps.sesam_py.outputs.message }}"

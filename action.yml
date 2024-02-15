@@ -1,31 +1,45 @@
 # action.yaml
-name: 'Custom GitHub Action'
-description: 'A GitHub Action that takes an input and returns the square of the number'
+name: 'Elvia sesam node validation'
+description: 'A GitHub Action that validates configs to be used in Sesam node (target node)'
+env:
+  CI_NODE: ${{ inputs.ci_node }}
+  CI_JWT: ${{ inputs.ci_jwt }}
+  NODE: ${{ inputs.node }}
+  JWT: ${{ inputs.jwt }}
+  WORKSPACE: ${{ inputs.workspace }}
+
 inputs:
-  num:
-    description: 'Enter a number'
+  ci_node:
+    description: 'URL of api rest endpoint for sesam dev-node used for CI (CI node)'
     required: true
-    default: "1"
+    default: "" # 
+  ci_jwt:
+    description: 'JWT token'
+    required: true
+    default: "" #
+  node:
+    description: 'URL of api rest endpoint for sesam node you want to check against (target node)'
+    required: true
+    default: "" #
+  jwt:
+    description: 'A read only JWT token for target node'
+    required: true
+    default: "" #
+  workspace:
+    description: 'Workspace name'
+    required: true
+    default: $GITHUB_WORKSPACE #
+  sesam_args:
+    description: 'Arguments to pass to sesam-py validate command'
+    required: false
+    default: "-version" #
+  
 outputs:
-  num_squared:
-    description: 'Square of the input'
-    # need to specify the extra `value` field for `composite` actions
-    value: ${{ steps.get-square.outputs.num_squared }}
+  report:
+    description: 'Summary of the validation'
+
 runs:
-  using: 'composite'
-  steps:
-    - name: Install Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'  
-    - name: Install Dependencies
-      run: pip install -r requirements.txt
-      shell: bash
-    - name: Pass Inputs to Shell
-      run: |
-              echo "INPUT_NUM=${{ inputs.num }}" >> $GITHUB_ENV
-      shell: bash
-    - name: Fetch the number's square
-      id: get-square
-      run: python src/get_num_square.py
-      shell: bash
+  using: 'docker'
+  dockerfile: 'Dockerfile'
+  args:
+    - ${{ inputs.sesam_args }}
