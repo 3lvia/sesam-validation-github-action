@@ -1,7 +1,8 @@
 # .github/workflows/test_action.yaml
 name: Test Action
 
-on: [push]
+on:
+  workflow_dispatch: # allow manual trigger of workflow
 
 jobs:
   validate:
