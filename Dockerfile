@@ -9,7 +9,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     unzip \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sSL https://github.com/sesam-community/sesam-py/archive/refs/tags/${INPUT_SESAM_PY_VERSION}.zip -o /tmp/sesam-py.zip && \
+ENV SESAM_PY_VERSION="2.10.0"
+
+RUN curl -sSL https://github.com/sesam-community/sesam-py/archive/refs/tags/${SESAM_PY_VERSION}.zip -o /tmp/sesam-py.zip && \
     unzip /tmp/sesam-py.zip -d /tmp  && \
     mv /tmp/sesam-py-*/* /sesam/ && \
     rm -rf /tmp/sesam-py.zip /tmp/sesam-py-*
