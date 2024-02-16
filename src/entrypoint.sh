@@ -11,6 +11,10 @@
 #     description: 'A read only JWT token for target node'
 #   INPUT_SESAM_ARGS:
 #     description: 'Arguments to pass to sesam-py validate command'
+#   INPUT_TEST_FOLDER:
+#     description: 'Name of test folder in node folder'
+#   INPUT_SESAM_PY_VERSION:
+#     description: 'Version of sesam-py to use'
   
 # outputs:
 #   OUTPUT_REPORT:
@@ -18,13 +22,16 @@
 #   GITHUB_OUTPUT:
 #     description: 'Output "file' from 
 
+export NODE=$INPUT_CI_NODE
+export JWT=$INPUT_CI_JWT
 
 # sesam-py "executabel"
 sesam="python3 /sesam/sesam.py "
 
 # Workspace
 # $GITHUB_WORKSPACE
-test_path=$GITHUB_WORKSPACE"/node/tests"
+# Normally /github/workspace
+test_path=$GITHUB_WORKSPACE"/node/"$INPUT_TEST_FOLDER
 
 # Install additional requirements if tests are present and have requirements.txt
 if test -f $test_path/requirements.txt; then

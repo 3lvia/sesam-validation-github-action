@@ -27,6 +27,14 @@ inputs:
     description: 'Arguments to pass to sesam-py validate command'
     required: true
     default: "-version" #
+  test_folder:
+    description: 'Folder of tests to run'
+    required: true
+    default: "tests" #
+  sesam_py_version:
+    description: 'Version of sesam-py to use'
+    required: true
+    default: "2.10.0" #
   
 outputs:
   report:
