@@ -43,5 +43,5 @@ outputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.sesam_args }}
+  # args:
+  #   - ${{ inputs.sesam_args }}

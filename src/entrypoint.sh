@@ -31,14 +31,17 @@ sesam="python3 /sesam/sesam.py "
 # Workspace
 # $GITHUB_WORKSPACE
 # Normally /github/workspace
-test_path=$GITHUB_WORKSPACE"/node/"$INPUT_TEST_FOLDER
+node_path=$GITHUB_WORKSPACE"/node"
+test_path=$node_path"/"$INPUT_TEST_FOLDER
 
 # Install additional requirements if tests are present and have requirements.txt
 if test -f $test_path/requirements.txt; then
   pip install --root-user-action=ignore --upgrade pip && pip install --root-user-action=ignore -r $test_path/requirements.txt
 fi
 
-# $sesam $INPUT_SESAM_ARGS ???
+cd $node_path
 
-$sesam "$@"
+$sesam $INPUT_SESAM_ARGS
+
+#  $sesam "$@" ???
 
