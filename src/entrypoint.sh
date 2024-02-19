@@ -41,6 +41,15 @@ fi
 
 cd $node_path
 
+# DEBUG
+echo "DEBUG"
+echo "node_path: $node_path"
+echo "test_path: $test_path"
+echo "\$@ : $@" 
+echo "INPUT_SESAM_ARGS: $INPUT_SESAM_ARGS"
+ls -la
+echo "DEBUG END"
+
 $sesam $INPUT_SESAM_ARGS
 
 #  $sesam "$@" ???
