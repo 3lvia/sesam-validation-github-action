@@ -53,9 +53,4 @@ echo "DEBUG END"
 $sesam $INPUT_SESAM_ARGS
 #  $sesam "$@" ???
 
-# CLEANUP
-echo "CLEANUP, resetting CI node"
-$sesam -vv reset
-
-
 
