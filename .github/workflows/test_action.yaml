@@ -20,7 +20,3 @@ jobs:
           ci_node: "${{ vars.ci_node }}"
           ci_jwt: "${{ secrets.ci_jwt }}"
           sesam_args: "-version"
-        # run: |
-        #   echo "Sesam-Py version: ${{ steps.sesam_py.outputs.version }}"
-        #   echo "Sesam-Py status: ${{ steps.sesam_py.outputs.status }}"
-        #   echo "Sesam-Py message: ${{ steps.sesam_py.outputs.message }}"
