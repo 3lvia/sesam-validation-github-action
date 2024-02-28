@@ -50,6 +50,12 @@ echo "INPUT_SESAM_ARGS: $INPUT_SESAM_ARGS"
 ls -la
 echo "DEBUG END"
 
+# Reset CI-node
+# Sleep 12 seconds to let the node reset of rocksdb complete
+echo "Resetting CI-node"
+$sesam -vv reset && sleep 12
+
+# Run sesam-py with arguments
 $sesam $INPUT_SESAM_ARGS
 #  $sesam "$@" ???
 
