@@ -59,4 +59,5 @@ $sesam -vv reset && sleep 12
 $sesam $INPUT_SESAM_ARGS
 #  $sesam "$@" ???
 
+echo "sesam_validation_step_summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_ENV"
 
