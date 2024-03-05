@@ -59,5 +59,7 @@ $sesam -vv reset && sleep 12
 $sesam $INPUT_SESAM_ARGS
 #  $sesam "$@" ???
 
-echo "sesam_validation_step_summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_ENV"
+mkdir -p /github/workspace/test_results
+cp $GITHUB_STEP_SUMMARY /github/workspace/test_results/step_summary.md
+echo "sesam_validation_step_summary=/github/workspace/test_results/step_summary.md" >> "$GITHUB_ENV"
 
