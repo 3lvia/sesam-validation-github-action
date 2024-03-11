@@ -42,7 +42,8 @@ fi
 cd $node_path
 
 # DEBUG
-if [ $INPUT_LOG_LEVVEL = "DEBUG" ]; then
+if [ "$LOGLEVEL" = "DEBUG" ] 
+then
   echo "DEBUG START"
   echo "node_path: $node_path"
   echo "test_path: $test_path"
