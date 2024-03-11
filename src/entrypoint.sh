@@ -42,24 +42,25 @@ fi
 cd $node_path
 
 # DEBUG
-echo "DEBUG"
-echo "node_path: $node_path"
-echo "test_path: $test_path"
-echo "\$@ : $@" 
-echo "INPUT_SESAM_ARGS: $INPUT_SESAM_ARGS"
-ls -la
+if [ $INPUT_LOG_LEVVEL == "DEBUG" ]; then
+  echo "DEBUG START"
+  echo "node_path: $node_path"
+  echo "test_path: $test_path"
+  echo "\$@ : $@" 
+  echo "INPUT_SESAM_ARGS: $INPUT_SESAM_ARGS"
+  ls -la
 echo "DEBUG END"
+fi
 
 # Reset CI-node
-# Sleep 12 seconds to let the node reset of rocksdb complete
-echo "Resetting CI-node"
-$sesam -vv reset && sleep 12
+# Sleep 15 seconds to let the node reset of rocksdb complete
+echo "Resetting CI-node and sleep 15 seconds to let the node reset of rocksdb complete. If reset OK, run sesam-py with arguments: $INPUT_SESAM_ARGS"
+$sesam -vv reset && sleep 15 && $sesam $INPUT_SESAM_ARGS
+export SESAM_PY_EXIT_CODE=$?
 
-# Run sesam-py with arguments
-$sesam $INPUT_SESAM_ARGS
-#  $sesam "$@" ???
-
+# Precerve the step summary for use in the next step
 mkdir -p /github/workspace/test_results
 cp $GITHUB_STEP_SUMMARY /github/workspace/test_results/step_summary.md
-echo "sesam_validation_step_summary=/github/workspace/test_results/step_summary.md" >> "$GITHUB_ENV"
+echo "sesam_validation_step_summary=test_results/step_summary.md" >> "$GITHUB_ENV"
 
+exit $SESAM_PY_EXIT_CODE
