@@ -56,7 +56,7 @@ fi
 # Reset CI-node
 # Sleep 15 seconds to let the node reset of rocksdb complete
 echo "Resetting CI-node and sleep 15 seconds to let the node reset of rocksdb complete. If reset OK, run sesam-py with arguments: $INPUT_SESAM_ARGS"
-$sesam -vv reset && sleep 15 && $sesam $INPUT_SESAM_ARGS
+$sesam -vv reset && sleep 15 && $sesam "$INPUT_SESAM_ARGS"
 export SESAM_PY_EXIT_CODE=$?
 
 # Precerve the step summary for use in the next step
